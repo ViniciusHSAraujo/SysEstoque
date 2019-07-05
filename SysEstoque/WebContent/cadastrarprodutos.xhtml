@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">Cadastro de Produtos</ui:define>
+	<ui:define name="tituloPrincipal">Cadastro de Produtos</ui:define>
+	<ui:define name="tituloSecundario">Preencha os campos para cadastrar um novo produto em nosso sistema.</ui:define>
+
+	<ui:define name="botoesAcao">
+		<b:commandButton value="Cadastrar"
+			action="#{produtoBean.cadastrarProduto()}" ajax="true" update="@form"
+			look="success" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<b:inputText id="nome" value="#{produtoBean.produto.nome}"
+			label="Nome do Produto:" required="true" />
+
+		<b:inputText id="valor" value="#{produtoBean.produto.valor}"
+			label="Valor do Produto" required="true" mask="decimal">
+			<f:facet name="prepend">
+				<h:outputText value="R$" />
+			</f:facet>
+		</b:inputText>
+		
+		<b:selectOneMenu id="marcaDoProduto"
+				value="#{produtoBean.produto.marca}"
+				converter="omnifaces.SelectItemsIndexConverter"
+				label="Marca do Produto"
+				required="true">
+				<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" />
+				<f:selectItems value="#{marcaBean.marcas }"
+					var="marca" itemLabel="#{marca.nome}"
+					itemValue="#{marca}" />
+			</b:selectOneMenu>
+
+	</ui:define>
+
+</ui:composition>
+</html>

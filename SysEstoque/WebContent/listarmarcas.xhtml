@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">Listagem de Marcas</ui:define>
+	<ui:define name="tituloPrincipal">Listagem de Marcas</ui:define>
+	<ui:define name="tituloSecundario">Confira, pesquise e exclua os produtos cadastrados no sistema</ui:define>
+
+	<ui:define name="botoesAcao">
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<b:dataTable value="#{marcaBean.listarMarcas()}" var="marca">
+			<b:dataTableColumn label="Ações">
+				    <b:commandButton value="Excluir"
+					action="#{marcaBean.excluirMarcas(marca)}" ajax="true"
+					update="@form" look="danger" />
+			</b:dataTableColumn>
+			<b:dataTableColumn value="#{marca.nome}" label="Nome" />
+			<b:dataTableColumn value="#{marca.descricao}" label="Descrição" />
+		</b:dataTable>
+	</ui:define>
+
+</ui:composition>
+</html>
